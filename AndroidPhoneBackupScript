@@ -1,0 +1,24 @@
+ #!/bin/bash
+
+## First backup with adb backup
+
+# Mount backup partition
+mount /dev/sdX /path/to/phone/backup
+
+# Deletes the ancient backup .adb file
+rm  /path/to/phone/backup/PhoneBackup.adb
+
+# Creates the new backup .adb file
+adb backup -apk -shared -all -f /path/to/phone/backup/PhoneBackup.ab
+
+
+## Second backup with adb pull
+
+# Deletes the ancient backup folder containing pulled data
+rm -r /path/to/phone/backup/folder
+
+# Pulls phone data to backup folder
+adb pull /sdcard/ /path/to/phone/backup/folder
+
+# Renames backup folder to convenient name
+mv /path/to/phone/backup/folder/sdcard /path/to/phone/backup/folder/PhoneBackup
