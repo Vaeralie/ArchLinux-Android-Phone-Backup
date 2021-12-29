@@ -1,4 +1,4 @@
-# AndroidPhoneBackupBashScript
+# Android Phone Backup Bash Script
 Simple Bash Executable to Backup Android Phone, using Android Debug Bridge (adb)
 
 This bash script backups your phone's data using both "adb backup" and "adb pull" commands
