@@ -1,9 +1,10 @@
  #!/bin/bash
 
-## First backup with adb backup
-
 # Mount backup partition
 mount /dev/sdX /path/to/phone/backup
+
+
+## First backup with adb backup
 
 # Deletes the ancient backup .adb file
 rm  /path/to/phone/backup/PhoneBackup.adb
