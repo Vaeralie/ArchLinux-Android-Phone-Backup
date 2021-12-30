@@ -9,7 +9,7 @@ mount /dev/sdX /path/to/phone/backup
 # Deletes the ancient backup .adb file
 rm  /path/to/phone/backup/PhoneBackup.adb
 
-# Creates the new backup .adb file
+# Creates the new full backup .adb file
 adb backup -apk -shared -all -f /path/to/phone/backup/PhoneBackup.ab
 
 
