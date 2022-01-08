@@ -1,8 +1,13 @@
-# Android Phone Backup Bash Script
-Simple Bash Executable to Backup Android Phone, using Android Debug Bridge (adb)
+# Presentation
 
-This bash script backups your phone's data using both "adb backup" and "adb pull" commands
+A small script that simplifies the backup of an Android phone on Arch Linux. 
+It automatically creates a backup file of the phone and pulls all of the device's files to a backup folder.
 
-The scripts needs to be modified according to your computer's specifications. The script is written so you know what to modify.
+Make sure USB debugging is allowed on your phone.
 
-Make sure that you have adb installed on your computer and that you have USB debugging turned on on your phone.
+# Requirements
+
+This script uses [Android Debug Bridge](https://wiki.archlinux.org/title/Android_Debug_Bridge) to backup the device. If needed, the [needed package](https://archlinux.org/packages/community/x86_64/android-tools/) can be directly installed by launching the script.
+
+
+
