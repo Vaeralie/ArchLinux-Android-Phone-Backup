@@ -1,25 +1,40 @@
- #!/bin/bash
+#!/bin/bash
 
-# Mount backup partition
-mount /dev/sdX /path/to/phone/backup
+ while true; do
 
+ if pacman -Qs android-tools | grep -q 'android-tools'; then
+    if adb devices | grep -q "device"; then
+        echo -e "\n"
 
-## First backup with adb backup
+        echo "Please enter the target directory of the backup (example : /path/to/phone/backup/)."
+        read -r BackupPath
 
-# Deletes the ancient backup .adb file
-rm  /path/to/phone/backup/PhoneBackup.adb
+        echo -e "\n"
+        echo "Backup starting..."
+        adb backup -apk -shared -all -f "$BackupPath"
+        adb pull /sdcard/ "$BackupPath"
+        mv "$BackupPath"/sdcard/ "$BackupPath"/PhoneBackup
 
-# Creates the new full backup .adb file
-adb backup -apk -shared -all -f /path/to/phone/backup/PhoneBackup.ab
+        echo -e "\n"
+        echo "Phone backup complete !"
+        exit
+    else
+        echo -e "\n"
+        echo "Your device is not accessible. Did you allow USB debugging ?"
+        exit
+    fi
 
+ else
+    echo -e "\n"
 
-## Second backup with adb pull
+ echo "This program requires the 'android-tools' package to be installed on your system."
+ echo "Install now ?"
+ select yn in "Yes" "No"; do
+    case $yn in
+        "Yes" ) pacman -S android-tools;;
+        "No" ) exit;;
+    esac
+ done
 
-# Deletes the ancient backup folder containing pulled data
-rm -r /path/to/phone/backup/folder
-
-# Pulls phone data to backup folder
-adb pull /sdcard/ /path/to/phone/backup/folder
-
-# Renames backup folder to convenient name
-mv /path/to/phone/backup/folder/sdcard /path/to/phone/backup/folder/PhoneBackup
+ fi
+ done
